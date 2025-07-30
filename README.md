@@ -1,123 +1,154 @@
 # ADmyBRAND Insights - Analytics Dashboard
 
-A modern, visually stunning analytics dashboard application built for digital marketing agencies. Track campaign performance, revenue trends, and user engagement with interactive charts and real-time updates.
+A modern, visually stunning analytics dashboard for digital marketing agencies with interactive charts, real-time data updates, and comprehensive data visualization.
 
 ## Features
 
-### 🎯 Core Dashboard Features
-- **Overview Metrics**: Revenue, Users, Conversions, and Growth Rate cards with real-time updates
-- **Interactive Charts**: Line charts for revenue trends, donut chart for traffic sources, bar chart for campaign performance
-- **Advanced Data Table**: Sortable and filterable campaigns table with pagination
-- **Export Functionality**: Download data in JSON or CSV formats
+- 📊 **Interactive Charts**: Line charts, donut charts, and bar charts with responsive design
+- 🌓 **Dark/Light Mode**: Seamless theme switching with smooth transitions
+- 📱 **Responsive Design**: Mobile-first approach with adaptive layouts
+- ⚡ **Real-time Updates**: Automatic data refresh every 30 seconds
+- 📤 **Export Functionality**: JSON and CSV export capabilities
+- 🎨 **Modern UI/UX**: Smooth animations and micro-interactions
+- 🔒 **Security**: Production-ready security headers and error handling
 
-### 🎨 UI/UX Features
-- **Professional Design**: Modern design system with consistent typography and spacing
-- **Dark/Light Mode**: Seamless theme switching with smooth transitions
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Smooth Animations**: Micro-interactions, hover effects, and loading states
-- **Real-time Updates**: Automatic data refresh every 30 seconds
+## Technology Stack
 
-### ⚡ Technical Features
-- **React 18**: Modern React with TypeScript for type safety
-- **Tailwind CSS**: Utility-first CSS framework with shadcn/ui components
-- **TanStack Query**: Efficient server state management with caching
-- **Recharts**: Beautiful, responsive chart library
-- **Express.js**: Robust backend API with TypeScript
+- **Frontend**: React 18 + TypeScript + Vite
+- **UI Components**: shadcn/ui + Tailwind CSS + Radix UI
+- **Charts**: Recharts for data visualization
+- **State Management**: TanStack Query (React Query)
+- **Backend**: Node.js + Express + TypeScript
+- **Database**: PostgreSQL with Drizzle ORM (ready for production)
 
-## Getting Started
+## Deployment on Vercel
 
 ### Prerequisites
-- Node.js 20+ 
-- PostgreSQL database (optional - uses in-memory storage by default)
 
-### Installation
+1. Create a [Vercel account](https://vercel.com)
+2. Install Vercel CLI (optional): `npm i -g vercel`
 
-1. Clone the repository
-```bash
-git clone <repository-url>
-cd admybrand-insights
+### Deploy from GitHub
+
+1. **Push to GitHub**:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin YOUR_GITHUB_REPO_URL
+   git push -u origin main
+   ```
+
+2. **Connect to Vercel**:
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Vercel will automatically detect the configuration
+
+3. **Environment Variables** (if using database):
+   - In Vercel dashboard, go to Project Settings > Environment Variables
+   - Add: `DATABASE_URL` (your PostgreSQL connection string)
+
+4. **Deploy**:
+   - Vercel will automatically build and deploy
+   - Your app will be available at `https://your-project-name.vercel.app`
+
+### Deploy with Vercel CLI
+
+1. **Install Vercel CLI**:
+   ```bash
+   npm i -g vercel
+   ```
+
+2. **Login and Deploy**:
+   ```bash
+   vercel login
+   vercel --prod
+   ```
+
+3. **Set Environment Variables**:
+   ```bash
+   vercel env add DATABASE_URL
+   ```
+
+### Configuration
+
+The project includes a `vercel.json` configuration file that:
+- Builds the frontend with Vite
+- Sets up serverless functions for the API
+- Configures routing for both frontend and backend
+- Optimizes for production deployment
+
+### Build Configuration
+
+- **Frontend Build**: `vite build --outDir dist/public`
+- **API Functions**: Serverless functions in `/api` directory
+- **Static Assets**: Served from `dist/public`
+- **Environment**: Automatically set to production
+
+## Local Development
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Start Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Access Application**:
+   - Frontend: http://localhost:5000
+   - API: http://localhost:5000/api
+
+## Project Structure
+
 ```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Set up environment variables (optional)
-```bash
-cp .env.example .env
-# Edit .env with your database configuration
-```
-
-4. Start the development server
-```bash
-npm run dev
-```
-
-The application will be available at `http://localhost:5000`
-
-## Deployment
-
-### Replit Deployment
-This application is optimized for Replit deployment:
-
-1. The application automatically detects the Replit environment
-2. Uses in-memory storage by default (no database setup required)
-3. Includes production build configuration
-4. SEO-optimized with meta tags and Open Graph properties
-
-### Production Build
-```bash
-npm run build
-npm start
+├── api/                 # Vercel serverless functions
+├── client/              # React frontend
+│   ├── src/
+│   │   ├── components/  # UI components
+│   │   ├── hooks/       # Custom hooks
+│   │   ├── lib/         # Utilities and configuration
+│   │   └── pages/       # Application pages
+├── server/              # Express backend (for local dev)
+├── shared/              # Shared types and schemas
+├── vercel.json          # Vercel deployment configuration
+└── package.json         # Dependencies and scripts
 ```
 
 ## API Endpoints
 
 - `GET /api/metrics` - Dashboard overview metrics
-- `GET /api/campaigns` - Campaign listing with performance data  
+- `GET /api/campaigns` - Campaign data with performance metrics
 - `GET /api/revenue-data` - Monthly revenue data for charts
 - `GET /api/traffic-sources` - Traffic source breakdown
-- `GET /api/export?format=json|csv` - Data export functionality
+- `GET /api/export` - Data export functionality
+- `GET /api/health` - Health check endpoint
 
-## Architecture
+## Performance Features
 
-### Frontend
-- **Framework**: React 18 with TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui
-- **State Management**: TanStack Query
-- **Build Tool**: Vite
-- **Charts**: Recharts
+- **Caching**: API responses cached with appropriate headers
+- **Real-time Updates**: Automatic data refresh with status indicator
+- **Loading States**: Beautiful loading skeletons for better UX
+- **Error Boundaries**: Graceful error handling and recovery
+- **SEO Optimized**: Comprehensive meta tags and Open Graph properties
 
-### Backend  
-- **Runtime**: Node.js with Express.js
-- **Language**: TypeScript
-- **Storage**: In-memory (production ready) or PostgreSQL
-- **Build**: esbuild optimization
+## Security
 
-## Project Structure
+- XSS Protection headers
+- Content Security Policy
+- Frame options protection
+- HTTPS enforcement in production
+- Input validation and sanitization
 
-```
-├── client/
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   └── lib/            # Utilities and configuration
-├── server/                 # Express.js backend
-├── shared/                 # Shared types and schemas
-└── dist/                   # Production build output
-```
+## Support
 
-## Development
+For deployment issues or questions, refer to:
+- [Vercel Documentation](https://vercel.com/docs)
+- [Project Issues](https://github.com/your-repo/issues)
 
-The application includes:
-- Hot Module Replacement (HMR) for fast development
-- TypeScript for type safety
-- ESLint and Prettier for code quality
-- Responsive design testing
-- Real-time data simulation
+---
 
-## License
-
-MIT License - see LICENSE file for details
+Built with ❤️ for digital marketing agencies
