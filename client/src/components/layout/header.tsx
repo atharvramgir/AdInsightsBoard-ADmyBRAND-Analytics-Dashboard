@@ -1,10 +1,24 @@
-import { Download, Moon, Sun } from "lucide-react";
+import { Download, Moon, Sun, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTheme } from "@/components/ui/theme-provider";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
+  const [lastUpdated, setLastUpdated] = useState<string>("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setLastUpdated(now.toLocaleTimeString());
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const handleExport = async (format: 'json' | 'csv') => {
     try {
@@ -28,7 +42,13 @@ export default function Header() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Analytics Dashboard</h2>
-          <p className="text-gray-600 dark:text-gray-400">Welcome back! Here's what's happening with your campaigns.</p>
+          <div className="flex items-center space-x-4">
+            <p className="text-gray-600 dark:text-gray-400">Welcome back! Here's what's happening with your campaigns.</p>
+            <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+              <Activity className="animate-pulse text-green-500" size={14} />
+              <span>Live • {lastUpdated}</span>
+            </div>
+          </div>
         </div>
         <div className="flex items-center space-x-4">
           <Select defaultValue="7days" data-testid="date-range-select">

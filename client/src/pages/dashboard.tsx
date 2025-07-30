@@ -6,8 +6,12 @@ import RevenueChart from "@/components/dashboard/revenue-chart";
 import TrafficChart from "@/components/dashboard/traffic-chart";
 import CampaignChart from "@/components/dashboard/campaign-chart";
 import CampaignsTable from "@/components/dashboard/campaigns-table";
+import { useRealTimeUpdates } from "@/hooks/use-real-time-updates";
 
 export default function Dashboard() {
+  // Enable real-time updates every 30 seconds
+  useRealTimeUpdates(true);
+
   useEffect(() => {
     document.title = "ADmyBRAND Insights - Analytics Dashboard";
   }, []);

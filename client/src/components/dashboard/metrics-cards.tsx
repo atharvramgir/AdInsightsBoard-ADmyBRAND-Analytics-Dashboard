@@ -75,7 +75,7 @@ export default function MetricsCards() {
         return (
           <Card 
             key={metric.key} 
-            className="transition-all duration-300 hover:shadow-md animate-fade-in bg-white dark:bg-gray-800"
+            className="transition-all duration-300 hover:shadow-lg hover:scale-105 animate-fade-in bg-white dark:bg-gray-800 cursor-pointer group"
             style={{ animationDelay: `${index * 0.1}s` }}
             data-testid={`metric-card-${metric.key}`}
           >
